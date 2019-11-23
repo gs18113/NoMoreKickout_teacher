@@ -54,6 +54,17 @@ public class DormDBManager extends SQLiteOpenHelper {
             Log.v("result", String.valueOf(s.first));
             returnval=s.first;
 
+            String sql = "select * from dormInfo where ID="+returnval;
+
+            Cursor cursor = db.rawQuery(sql, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Log.v("asfd", cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3));
+                } while (cursor.moveToNext());
+            }
+
+
             ContentValues contentValues = new ContentValues();
             contentValues.put("ID", returnval);
             contentValues.put("building", s.second.first);
@@ -62,6 +73,7 @@ public class DormDBManager extends SQLiteOpenHelper {
 
             Log.v("asdf", returnval+"*******************");
 
+
             db.insert("dormInfo", null, contentValues);
         }
 
@@ -69,7 +81,7 @@ public class DormDBManager extends SQLiteOpenHelper {
         @Override
         protected final Pair<Integer,Pair<String,Integer>> doInBackground(Pair<String, Integer>... pairs) {
             try {
-                String url="http://192.168.43.94/";
+                String url="http://34.84.59.141/";
                 URL object = new URL(url);
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
@@ -104,6 +116,7 @@ public class DormDBManager extends SQLiteOpenHelper {
                 }
                 localDataOutputStream.close();
                 in.close();
+                con.disconnect();
                 Integer response = Integer.parseInt(stringBuilder.toString());
                 return Pair.create(response, pairs[0]);
             } catch (Exception e) {
