@@ -75,12 +75,12 @@ public class DormDBManager extends SQLiteOpenHelper {
 
                 con.connect();
 
-                /*DataOutputStream localDataOutputStream = new DataOutputStream(con.getOutputStream());
+                DataOutputStream localDataOutputStream = new DataOutputStream(con.getOutputStream());
                 localDataOutputStream.writeBytes(cred.toString());
                 localDataOutputStream.flush();
                 localDataOutputStream.close();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                /*BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String decodedString;
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((decodedString = in.readLine()) != null) {
