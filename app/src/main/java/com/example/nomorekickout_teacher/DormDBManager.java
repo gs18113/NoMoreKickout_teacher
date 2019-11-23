@@ -33,6 +33,9 @@ import java.util.HashMap;
 public class DormDBManager extends SQLiteOpenHelper {
     public static final String ROOT_DIR = "/data/data/com.example.nomorekickout_teacher/databases/";
     private static final String DATABASE_NAME = "db";
+    private Integer returnval;
+    private Boolean finished=false;
+    SQLiteDatabase db;
 
     public DormDBManager(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -43,19 +46,30 @@ public class DormDBManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
     }
 
-    private class SendQuery extends AsyncTask<Pair<String,Integer>,String,Integer> {
+    private class SendQuery extends AsyncTask<Pair<String,Integer>,String,Pair<Integer,Pair<String,Integer>>> {
 
         @Override
-        protected void onPostExecute(Integer s) {
+        protected void onPostExecute(Pair<Integer,Pair<String,Integer>> s) {
             super.onPostExecute(s);
-            Log.v("result", String.valueOf(s));
+            Log.v("result", String.valueOf(s.first));
+            returnval=s.first;
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("ID", returnval);
+            contentValues.put("building", s.second.first);
+            contentValues.put("room", s.second.second);
+            contentValues.put("members", "");
+
+            Log.v("asdf", returnval+"*******************");
+
+            db.insert("dormInfo", null, contentValues);
         }
 
         @SafeVarargs
         @Override
-        protected final Integer doInBackground(Pair<String, Integer>... pairs) {
+        protected final Pair<Integer,Pair<String,Integer>> doInBackground(Pair<String, Integer>... pairs) {
             try {
-                String url="http://10.116.215.52/";
+                String url="http://crypto-eon-259913.appspot.com/";
                 URL object = new URL(url);
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
@@ -76,23 +90,26 @@ public class DormDBManager extends SQLiteOpenHelper {
                 con.connect();
 
                 DataOutputStream localDataOutputStream = new DataOutputStream(con.getOutputStream());
-                localDataOutputStream.writeBytes(cred.toString());
+                localDataOutputStream.writeBytes("qtype=addRoom&jason="+cred.toString());
                 localDataOutputStream.flush();
-                localDataOutputStream.close();
 
-                /*BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                int status = con.getResponseCode();
+                Log.v("asdf", status+"$$$$$$$$$$$$$$$$$$$");
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String decodedString;
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((decodedString = in.readLine()) != null) {
                     stringBuilder.append(decodedString);
                 }
+                localDataOutputStream.close();
                 in.close();
                 Integer response = Integer.parseInt(stringBuilder.toString());
-                return response;*/
+                return Pair.create(response, pairs[0]);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return 0;
+            return Pair.create(0, Pair.create("",0));
         }
 
         @Override
@@ -175,7 +192,7 @@ public class DormDBManager extends SQLiteOpenHelper {
 
     public Boolean addDorm(String building, int room) {
         String sql="select * from dormInfo where building='"+building+"'";
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql,null);
 
         if (cursor.moveToFirst()) {
@@ -188,17 +205,24 @@ public class DormDBManager extends SQLiteOpenHelper {
         SendQuery sendQuery = new SendQuery();
         sendQuery.execute(Pair.create(building,room));
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("building", building);
-        contentValues.put("room", room);
-
-        db.insert("dormInfo", null, contentValues);
-
         return true;
     }
 
     public Boolean deleteDorm(String building, int room) {
-        //
-        return true;
+        String sql="select * from dormInfo where building='"+building+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getInt(2)==room) {
+                    db.delete("dormInfo", "ID="+cursor.getInt(0), null);
+                    //Log.v("asdf", cursor.getInt(0)+"%%%%%%%%%%%%%%");
+                    return true;
+                }
+            }while (cursor.moveToNext());
+        }
+
+        return false;
     }
 }
