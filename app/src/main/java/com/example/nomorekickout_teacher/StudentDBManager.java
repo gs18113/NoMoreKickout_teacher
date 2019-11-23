@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class StudentDBManager extends SQLiteOpenHelper {
 
     public static final String ROOT_DIR = "/data/data/com.example.nomorekickout_teacher/databases/";
-    private static final String DATABASE_NAME = "db.db";
+    private static final String DATABASE_NAME = "db";
 
     public StudentDBManager(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -79,12 +79,12 @@ public class StudentDBManager extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> data = new HashMap<String, String>();
-                data.put("ID",cursor.getString(1));
-                data.put("building",cursor.getString(2));
-                data.put("room",cursor.getString(3));
-                data.put("name",cursor.getString(4));
-                data.put("latecnt",cursor.getString(5));
-                data.put("alarm",cursor.getString(6));
+                data.put("ID",cursor.getString(0));
+                data.put("building",cursor.getString(1));
+                data.put("room",cursor.getString(2));
+                data.put("name",cursor.getString(3));
+                data.put("latecnt",cursor.getString(4));
+                data.put("alarm",cursor.getString(5));
 
                 arraylist.add(data);
 

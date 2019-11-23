@@ -4,6 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".RoomsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/addbuilding"
+            android:layout_width="140dp"
+            android:layout_height="50dp"/>
+
+        <EditText
+            android:id="@+id/addroom"
+            android:layout_width="140dp"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/addconfirm"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="확인"
+            android:onClick="addConfirm"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/deletebuilding"
+            android:layout_width="140dp"
+            android:layout_height="50dp"/>
+
+        <EditText
+            android:id="@+id/deleteroom"
+            android:layout_width="140dp"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/deleteconfirm"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="확인"
+            android:onClick="deleteConfirm"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/getback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="돌아가기"
+        android:onClick="getBack"/>
 
 </LinearLayout>
