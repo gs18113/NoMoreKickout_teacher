@@ -14,11 +14,13 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -41,26 +43,28 @@ public class DormDBManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
     }
 
-    private class SendQuery extends AsyncTask<Pair<String,Integer>,String,String> {
+    private class SendQuery extends AsyncTask<Pair<String,Integer>,String,Integer> {
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
+            Log.v("result", String.valueOf(s));
         }
 
         @SafeVarargs
         @Override
-        protected final String doInBackground(Pair<String, Integer>... pairs) {
+        protected final Integer doInBackground(Pair<String, Integer>... pairs) {
             try {
-                String url="http://192.168.43.94/";
+                String url="http://10.116.215.52/";
                 URL object = new URL(url);
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
                 con.setRequestMethod("POST");
-                con.setRequestProperty("Content-Type", "text/plain;charset=UTF-8");
-                con.setRequestProperty("Accept","text/plain");
+                con.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                con.setRequestProperty("Accept","application/json");
                 con.setDoOutput(true);
                 con.setDoInput(true);
+                con.setChunkedStreamingMode(0);
 
                 JSONObject cred = new JSONObject();
                 Log.v("asdf", pairs[0].first+" 2");
@@ -71,14 +75,24 @@ public class DormDBManager extends SQLiteOpenHelper {
 
                 con.connect();
 
-                DataOutputStream localDataOutputStream = new DataOutputStream(con.getOutputStream());
+                /*DataOutputStream localDataOutputStream = new DataOutputStream(con.getOutputStream());
                 localDataOutputStream.writeBytes(cred.toString());
                 localDataOutputStream.flush();
                 localDataOutputStream.close();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String decodedString;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((decodedString = in.readLine()) != null) {
+                    stringBuilder.append(decodedString);
+                }
+                in.close();
+                Integer response = Integer.parseInt(stringBuilder.toString());
+                return response;*/
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return "";
+            return 0;
         }
 
         @Override
