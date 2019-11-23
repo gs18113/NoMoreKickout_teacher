@@ -34,16 +34,34 @@ public class RoomsActivity extends AppCompatActivity {
     }
 
     public void addConfirm(View view) {
-        Boolean done = dbManager.addDorm(addBuilding.getText().toString(), Integer.parseInt(addRoom.getText().toString()));
-        if (!done) {
-            Toast.makeText(getApplicationContext(), "이미 존재하는 방입니다.", Toast.LENGTH_LONG).show();
+        if (addBuilding.getText().toString().equals("") || addRoom.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "입력을 완료해주세요.", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Boolean done = dbManager.addDorm(addBuilding.getText().toString(), Integer.parseInt(addRoom.getText().toString()));
+            if (!done) {
+                Toast.makeText(getApplicationContext(), "이미 존재하는 방입니다.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                addBuilding.setText("");
+                addRoom.setText("");
+            }
         }
     }
 
     public void deleteConfirm(View view) {
-        Boolean done = dbManager.deleteDorm(deleteBuilding.getText().toString(), Integer.parseInt(deleteRoom.getText().toString()));
-        if (!done) {
-            Toast.makeText(getApplicationContext(), "존재하지 않는 방입니다.", Toast.LENGTH_LONG).show();
+        if (deleteBuilding.getText().toString().equals("") || deleteRoom.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "입력을 완료해주세요.", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Boolean done = dbManager.deleteDorm(deleteBuilding.getText().toString(), Integer.parseInt(deleteRoom.getText().toString()));
+            if (!done) {
+                Toast.makeText(getApplicationContext(), "존재하지 않는 방입니다.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                deleteBuilding.setText("");
+                deleteRoom.setText("");
+            }
         }
     }
 
