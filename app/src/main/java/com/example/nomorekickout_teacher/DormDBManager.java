@@ -69,7 +69,7 @@ public class DormDBManager extends SQLiteOpenHelper {
         @Override
         protected final Pair<Integer,Pair<String,Integer>> doInBackground(Pair<String, Integer>... pairs) {
             try {
-                String url="http://crypto-eon-259913.appspot.com/";
+                String url="http://192.168.43.94/";
                 URL object = new URL(url);
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
@@ -90,7 +90,7 @@ public class DormDBManager extends SQLiteOpenHelper {
                 con.connect();
 
                 DataOutputStream localDataOutputStream = new DataOutputStream(con.getOutputStream());
-                localDataOutputStream.writeBytes("qtype=addRoom&jason="+cred.toString());
+                localDataOutputStream.writeBytes("qtype=addRoom&json="+cred.toString());
                 localDataOutputStream.flush();
 
                 int status = con.getResponseCode();
