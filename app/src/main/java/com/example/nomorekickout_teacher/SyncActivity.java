@@ -23,7 +23,7 @@ public class SyncActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 String json = s.second;
 
-                SQLiteDatabase db = dormDBManager.getReadableDatabase();
+                SQLiteDatabase db = dormDBManager.getWritableDatabase();
                 db.execSQL("delete from dormInfo");
 
                 JSONArray jsonArray = new JSONArray(json);
