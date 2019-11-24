@@ -34,8 +34,6 @@ public class CheckActivity extends AppCompatActivity {
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
         public void handleResult(Pair<String, String> s) {
-            if (s.first.equals("wakeAll"));
-            else if (s.first.equals("getRoomAwake"));
         }
     });
 
