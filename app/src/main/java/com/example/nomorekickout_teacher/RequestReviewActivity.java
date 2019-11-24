@@ -15,3 +15,4 @@ public class RequestReviewActivity extends AppCompatActivity {
         Intent intent = getIntent();
     }
 }
+//make allow all button
