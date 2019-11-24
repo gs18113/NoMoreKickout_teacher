@@ -68,6 +68,9 @@ public class RequestReviewActivity extends AppCompatActivity {
 
                     adapter2.notifyDataSetChanged();
                 }
+                else if (s.first.equals("answerRequest")) {
+                    Log.v("error?", s.second);
+                }
             } catch (Exception e) {
                 Toast toast = Toast.makeText(getApplicationContext(), "요청 통신 오류. 재시도중...", Toast.LENGTH_SHORT);
                 toast.show();
