@@ -60,7 +60,7 @@ public class CheckActivity extends AppCompatActivity {
                         public void run() {
                             serverManager.execute(
                                     Pair.create("qtype", "addLate"),
-                                    Pair.create("json", late)
+                                    Pair.create("rows", late)
                             );
                         }
                     }, 2000);
@@ -184,7 +184,7 @@ public class CheckActivity extends AppCompatActivity {
         Log.v("late", late);
         serverManager.execute(
                 Pair.create("qtype", "addLate"),
-                Pair.create("json", late)
+                Pair.create("rows", late)
         );
         finish();
     }
