@@ -1,27 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity"
+android:orientation="vertical"
+    >
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="No More Kickout!"
+    android:textSize="40sp"
+    android:textColor="#000000"
+    android:layout_gravity="center"
+    />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Teacher ver."
+    android:textSize="30sp"
+    android:layout_gravity="center"
+    android:layout_margin="20dp"
+    />
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/tocheck"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아침 점호 시작"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/toroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="방 추가 또는 제거"/>
+        <Button
+            android:id="@+id/tocheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="아침 점호 시작"/>
 
-    <Button
-        android:id="@+id/torequest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="요청 처리"/>
+        <Button
+            android:id="@+id/torequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="요청 처리"/>
 
-    <Button
-        android:id="@+id/toroom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="방 추가 또는 제거"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
