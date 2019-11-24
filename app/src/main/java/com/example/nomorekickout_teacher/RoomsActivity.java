@@ -23,6 +23,8 @@ public class RoomsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooms);
 
+        startActivity(new Intent(this, SyncActivity.class));
+
         Intent intent = getIntent();
 
         addBuilding=(EditText)findViewById(R.id.addbuilding);

@@ -11,6 +11,9 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -275,5 +278,9 @@ public class DormDBManager extends SQLiteOpenHelper {
         }
 
         return false;
+    }
+
+    public void syncDorm(){
+
     }
 }

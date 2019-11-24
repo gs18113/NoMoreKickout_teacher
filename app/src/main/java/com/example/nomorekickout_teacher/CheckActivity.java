@@ -44,6 +44,8 @@ public class CheckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
 
+        startActivity(new Intent(this, SyncActivity.class));
+
         Intent intent = getIntent();
 
         selectBuilding=(Spinner)findViewById(R.id.selectbuilding);
