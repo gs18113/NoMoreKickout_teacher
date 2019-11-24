@@ -36,7 +36,7 @@
             android:id="@+id/addconfirm"
             android:layout_width="70dp"
             android:layout_height="50dp"
-            android:text="확인"
+            android:text="추가"
             android:onClick="addConfirm"/>
 
     </LinearLayout>
@@ -61,7 +61,7 @@
             android:id="@+id/deleteconfirm"
             android:layout_width="70dp"
             android:layout_height="50dp"
-            android:text="확인"
+            android:text="제거"
             android:onClick="deleteConfirm"/>
 
     </LinearLayout>
