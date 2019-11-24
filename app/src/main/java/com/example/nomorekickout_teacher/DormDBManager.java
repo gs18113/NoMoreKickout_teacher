@@ -46,15 +46,17 @@ public class DormDBManager extends SQLiteOpenHelper {
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
         public void handleResult(Pair<String, String> s) {
-            if (s.first.equals("deleteRoom")) {
-                if (s.second==null) {
-                    new Timer().schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            serverManager.execute(pairs);
-                        }
-                    }, 2000);
+            try {
+                if (s.first.equals("deleteRoom")) {
+                    Log.v("needed", s.second);
                 }
+            }catch (Exception e) {
+            }
+            try {
+                if (s.first.equals("addRoom")) {
+                    Log.v("needed", s.second);
+                }
+            }catch (Exception e) {
             }
         }
     });
