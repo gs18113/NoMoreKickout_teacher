@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class CheckActivity extends AppCompatActivity {
     Map<Integer, Boolean> floor = new HashMap<>();
     DormDBManager dbManager;
     ArrayList<HashMap<String, String>> arrayList;
+    GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,9 @@ public class CheckActivity extends AppCompatActivity {
         ad_floor=new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, strings2);
 
         selectFloor.setAdapter(ad_floor);
+
+        gridView=(GridView)findViewById(R.id.gridview);
+
     }
 
     public void changePlace(View view) {

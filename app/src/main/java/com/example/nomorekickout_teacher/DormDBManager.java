@@ -86,6 +86,7 @@ public class DormDBManager extends SQLiteOpenHelper {
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
                 con.setRequestMethod("POST");
+                con.setRequestProperty("Accept-Encoding", "identity");
                 con.setRequestProperty("Content-Type", "text/plain;charset=UTF-8");
                 con.setRequestProperty("Accept","text/plain");
                 con.setDoOutput(true);
