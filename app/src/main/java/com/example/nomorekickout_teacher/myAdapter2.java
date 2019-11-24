@@ -83,9 +83,9 @@ public class myAdapter2 extends BaseAdapter {
         } else {
             view = (ViewHolder2) convertView.getTag();
         }
-        //view.tick.setTag(position);
-        //view.nametext.setText("" + mylist.get(position).getTitle());
-        //view.tick.setChecked(mylist.get(position).isChecked());
+        view.nameText.setText("" + mylist.get(position).getTitle());
+        view.noButton.setTag(position);
+        view.okButton.setTag(position);
         return convertView;
     }
 }
