@@ -47,6 +47,11 @@ public class myAdapter2 extends BaseAdapter {
         public Button okButton, noButton;
     }
 
+    public void remove(int position) {
+        mylist.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder2 view = null;
@@ -64,7 +69,7 @@ public class myAdapter2 extends BaseAdapter {
                             Pair.create("RID", mylist.get(position).getRID().toString()),
                             Pair.create("confirm", "1")
                     );
-                    //delete
+                    remove(position);
                 }
             });
             view.noButton = (Button) convertView.findViewById(R.id.adapter2nobutton);
@@ -76,7 +81,7 @@ public class myAdapter2 extends BaseAdapter {
                             Pair.create("RID", mylist.get(position).getRID().toString()),
                             Pair.create("confirm", "0")
                     );
-                    //delete
+                    remove(position);
                 }
             });
             convertView.setTag(view);

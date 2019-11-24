@@ -50,6 +50,8 @@ public class ServerManager{
                 con.setRequestProperty("Accept","application/json");
                 con.setDoOutput(true);
                 con.setDoInput(true);
+                con.setConnectTimeout(2000);
+                con.setReadTimeout(2000);
                 con.setChunkedStreamingMode(0);
 
                 JSONObject cred = new JSONObject();
@@ -81,7 +83,7 @@ public class ServerManager{
                 localDataOutputStream.close();
                 in.close();
                 con.disconnect();
-                return Pair.create(pairs[0].first, stringBuilder.toString());
+                return Pair.create(pairs[0].second, stringBuilder.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }

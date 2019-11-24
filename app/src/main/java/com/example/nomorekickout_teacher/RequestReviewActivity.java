@@ -5,10 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class RequestReviewActivity extends AppCompatActivity {
@@ -23,7 +32,39 @@ public class RequestReviewActivity extends AppCompatActivity {
             if (s.first.equals("wakeAll"));
             else if (s.first.equals("getRoomAwake"));
             else if (s.first.equals("getAllRequests")) {
-                //
+                Gson gson = new Gson();
+                String json = s.second;
+                Log.v("why not showing?", json);
+                ArrayList<Requests> request_list=new ArrayList<>();
+
+                try {
+                    JSONArray jsonArray = new JSONArray(json);
+
+                    int index=0;
+                    while (index<jsonArray.length()) {
+                        Requests requests=gson.fromJson(jsonArray.get(index).toString(),Requests.class);
+                        request_list.add(requests);
+                        index++;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                myItem2s.clear();
+                for (int i=0; i<request_list.size(); i++) {
+                    String title="";
+
+                    if (request_list.get(i).getRequestType().equals("1")) {//change user
+                        title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"으로 변경 요청";
+                    }
+                    else {//new user
+                        title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"으로 가입 요청";
+                    }
+
+                    myItem2s.add(new MyItem2(title, Integer.parseInt(request_list.get(i).getID())));
+                }
+
+                adapter2.notifyDataSetChanged();
             }
         }
     });
