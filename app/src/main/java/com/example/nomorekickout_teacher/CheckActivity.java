@@ -25,7 +25,6 @@ public class CheckActivity extends AppCompatActivity {
     ArrayAdapter<String> ad_building, ad_floor;
     Map<String, Boolean> building = new HashMap<>();
     Map<Integer, Boolean> floor = new HashMap<>();
-    Map<Integer, Boolean> isAwake = new HashMap<>();
     DormDBManager dbManager;
     ArrayList<HashMap<String, String>> arrayList;
     ArrayList<MyItem> myItems = new ArrayList<>();
@@ -55,12 +54,15 @@ public class CheckActivity extends AppCompatActivity {
 
         ArrayList<String> buildingnames = new ArrayList<>();
         buildingnames.add("모든 건물");
+        statics.initialize();
+        Log.v("해명해", arrayList.toString());
         for (int i=0; i<arrayList.size(); i++) {
             String now = arrayList.get(i).get("building");
+            statics.putmap(Integer.parseInt(arrayList.get(i).get("ID")), false);
+            Log.v("what is this", arrayList.get(i).get("ID"));
             if (building.containsKey(now)||now.equals("")) continue;
             buildingnames.add(now);
             building.put(now, true);
-            isAwake.put(Integer.parseInt(arrayList.get(i).get("ID")), false);
         }
 
         String[] strings = new String[buildingnames.size()];
@@ -120,7 +122,9 @@ public class CheckActivity extends AppCompatActivity {
         Log.v("gegegegege", dbarray.toString());
 
         for (int i=0; i<dbarray.size(); i++) {
-            myItems.add(new MyItem(dbarray.get(i).get("building")+" "+dbarray.get(i).get("room")+"호", dbarray.get(i).get("isawake").equals("1"), Integer.parseInt(dbarray.get(i).get("ID"))));
+            Log.v("print this", dbarray.get(i).get("ID"));
+            Log.v("and this", statics.getmap(Integer.parseInt(dbarray.get(i).get("ID"))).toString());
+            myItems.add(new MyItem(dbarray.get(i).get("building")+" "+dbarray.get(i).get("room")+"호", statics.getmap(Integer.parseInt(dbarray.get(i).get("ID"))), Integer.parseInt(dbarray.get(i).get("ID"))));
         }
 
         adapter.notifyDataSetChanged();

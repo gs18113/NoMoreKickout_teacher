@@ -75,6 +75,7 @@ class myAdapter extends BaseAdapter {
                                 Pair.create("ID", mylist.get(getPosition).getID().toString()),
                                 Pair.create("isawake", "1")
                         );
+                        statics.putmap(mylist.get(getPosition).getID(), true);
                     }
                     else {
                         serverManager.execute(
@@ -82,6 +83,7 @@ class myAdapter extends BaseAdapter {
                                 Pair.create("ID", mylist.get(getPosition).getID().toString()),
                                 Pair.create("isawake", "0")
                         );
+                        statics.putmap(mylist.get(getPosition).getID(), false);
                     }
                 }
             });
