@@ -49,6 +49,7 @@ public class RoomsActivity extends AppCompatActivity {
             else {
                 addBuilding.setText("");
                 addRoom.setText("");
+                Toast.makeText(getApplicationContext(), "성공적으로 추가하였습니다.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -65,6 +66,7 @@ public class RoomsActivity extends AppCompatActivity {
             else {
                 deleteBuilding.setText("");
                 deleteRoom.setText("");
+                Toast.makeText(getApplicationContext(), "성공적으로 제거하였습니다.", Toast.LENGTH_LONG).show();
             }
         }
     }
