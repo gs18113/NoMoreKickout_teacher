@@ -19,13 +19,13 @@ public class SyncActivity extends AppCompatActivity {
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
         public void handleResult(Pair<String, String> s) {
-            Gson gson = new Gson();
-            String json = s.second;
-
-            SQLiteDatabase db = dormDBManager.getReadableDatabase();
-            db.execSQL("delete from dormInfo");
-
             try {
+                Gson gson = new Gson();
+                String json = s.second;
+
+                SQLiteDatabase db = dormDBManager.getReadableDatabase();
+                db.execSQL("delete from dormInfo");
+
                 JSONArray jsonArray = new JSONArray(json);
                 int index = 0;
                 while (index < jsonArray.length()) {
