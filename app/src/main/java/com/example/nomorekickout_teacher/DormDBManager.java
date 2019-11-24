@@ -269,6 +269,10 @@ public class DormDBManager extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 if (cursor.getInt(2)==room) {
+                    serverManager.execute(
+                            Pair.create("qtype", "deleteRoom"),
+                            Pair.create("ID", String.valueOf(cursor.getInt(0)))
+                    );
                     db.delete("dormInfo", "ID="+cursor.getInt(0), null);
                     //Log.v("asdf", cursor.getInt(0)+"%%%%%%%%%%%%%%");
                     return true;
