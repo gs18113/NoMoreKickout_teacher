@@ -61,7 +61,7 @@ public class myAdapter2 extends BaseAdapter {
                 public void onClick(View view) {
                     serverManager.execute(
                             Pair.create("qtype", "answerRequest"),
-                            Pair.create("RID", ""),
+                            Pair.create("RID", mylist.get(position).getRID().toString()),
                             Pair.create("confirm", "1")
                     );
                     //delete
@@ -71,7 +71,12 @@ public class myAdapter2 extends BaseAdapter {
             view.noButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //
+                    serverManager.execute(
+                            Pair.create("qtype", "answerRequest"),
+                            Pair.create("RID", mylist.get(position).getRID().toString()),
+                            Pair.create("confirm", "0")
+                    );
+                    //delete
                 }
             });
             convertView.setTag(view);

@@ -2,6 +2,7 @@ package com.example.nomorekickout_teacher;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
