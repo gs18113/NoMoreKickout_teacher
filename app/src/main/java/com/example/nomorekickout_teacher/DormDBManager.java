@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -36,6 +37,14 @@ public class DormDBManager extends SQLiteOpenHelper {
     private Integer returnval;
     private Boolean finished=false;
     SQLiteDatabase db;
+
+    ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
+        @Override
+        public void handleResult(Pair<String, String> s) {
+            if (s.first.equals("wakeAll"));
+            else if (s.first.equals("getRoomAwake"));
+        }
+    });
 
     public DormDBManager(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -98,7 +107,7 @@ public class DormDBManager extends SQLiteOpenHelper {
                 Log.v("asdf", pairs[0].first+" 2");
                 cred.put("building", URLEncoder.encode(pairs[0].first, "UTF-8"));
                 cred.put("room", pairs[0].second);
-                cred.put("members", "");
+                cred.put("members", "[]");
                 cred.put("isawake", 0);
                 Log.v("asdf", cred.toString());
 
@@ -184,6 +193,31 @@ public class DormDBManager extends SQLiteOpenHelper {
         ArrayList<HashMap<String, String>> arraylist = new ArrayList<HashMap<String, String>>();
 
         String sql = "select * from dormInfo order by ID";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> data = new HashMap<String, String>();
+                data.put("ID",cursor.getString(0));
+                data.put("building",cursor.getString(1));
+                data.put("room",cursor.getString(2));
+                data.put("members",cursor.getString(3));
+                data.put("isawake",cursor.getString(4));
+
+                arraylist.add(data);
+
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return arraylist;
+    }
+
+    public ArrayList<HashMap<String,String>> getList(String sql) {
+        ArrayList<HashMap<String, String>> arraylist = new ArrayList<HashMap<String, String>>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
