@@ -39,7 +39,6 @@ public class DormDBManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "db";
     private Integer returnval;
     private Boolean finished=false;
-    SQLiteDatabase db;
 
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
@@ -67,6 +66,8 @@ public class DormDBManager extends SQLiteOpenHelper {
             returnval=s.first;
 
             String sql = "select * from dormInfo where ID="+returnval;
+
+            SQLiteDatabase db = getWritableDatabase();
 
             Cursor cursor = db.rawQuery(sql, null);
 
@@ -246,7 +247,7 @@ public class DormDBManager extends SQLiteOpenHelper {
 
     public Boolean addDorm(String building, int room) {
         String sql="select * from dormInfo where building='"+building+"'";
-        db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql,null);
 
         if (cursor.moveToFirst()) {
