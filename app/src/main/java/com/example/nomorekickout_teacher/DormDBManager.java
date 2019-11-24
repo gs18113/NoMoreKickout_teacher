@@ -70,6 +70,7 @@ public class DormDBManager extends SQLiteOpenHelper {
             contentValues.put("building", s.second.first);
             contentValues.put("room", s.second.second);
             contentValues.put("members", "");
+            contentValues.put("isawake", 0);
 
             Log.v("asdf", returnval+"*******************");
 
@@ -98,6 +99,7 @@ public class DormDBManager extends SQLiteOpenHelper {
                 cred.put("building", URLEncoder.encode(pairs[0].first, "UTF-8"));
                 cred.put("room", pairs[0].second);
                 cred.put("members", "");
+                cred.put("isawake", 0);
                 Log.v("asdf", cred.toString());
 
                 con.connect();
@@ -193,6 +195,7 @@ public class DormDBManager extends SQLiteOpenHelper {
                 data.put("building",cursor.getString(1));
                 data.put("room",cursor.getString(2));
                 data.put("members",cursor.getString(3));
+                data.put("isawake",cursor.getString(4));
 
                 arraylist.add(data);
 

@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Spinner;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +25,13 @@ public class CheckActivity extends AppCompatActivity {
     Map<Integer, Boolean> floor = new HashMap<>();
     DormDBManager dbManager;
     ArrayList<HashMap<String, String>> arrayList;
-    GridView gridView;
+    ListView listView;
+    ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
+        @Override
+        public void handleResult(Pair<String, String> s) {
+            if(s.first.equals("wakeAll"));
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +80,33 @@ public class CheckActivity extends AppCompatActivity {
 
         selectFloor.setAdapter(ad_floor);
 
-        gridView=(GridView)findViewById(R.id.gridview);
-
-    }
-
-    public void changePlace(View view) {
         //
     }
+
+    public void changeList() {
+        String nowBuilding=selectBuilding.getSelectedItem().toString();
+        String nowFloor=selectFloor.getSelectedItem().toString();
+        if (nowBuilding.equals("모든 건물")) {
+            if (nowFloor.equals("모든 층")) {
+                //
+            }
+            else {
+                //
+            }
+        }
+        else {
+            if (nowFloor.equals("모든 층")) {
+                //
+            }
+            else {
+                //
+            }
+        }
+    }
+
+    public void changePlace(View view) {changeList();}
+
+    public void sendAlarm(View view) {serverManager.execute(Pair.create("qtype", "wakeAll"));}
 
     public void getBack(View view) {finish();}
 }
