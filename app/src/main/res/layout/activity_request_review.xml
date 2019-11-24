@@ -7,14 +7,24 @@
     tools:context=".RequestReviewActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="요청 처리"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"/>
+
     <ListView
         android:id="@+id/requestlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="470dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
         <Button
             android:layout_width="wrap_content"
