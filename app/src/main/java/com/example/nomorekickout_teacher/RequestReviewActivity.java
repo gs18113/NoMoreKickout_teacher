@@ -61,10 +61,13 @@ public class RequestReviewActivity extends AppCompatActivity {
                         title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"으로 가입 요청";
                     }
 
-                    myItem2s.add(new MyItem2(title, Integer.parseInt(request_list.get(i).getID())));
+                    myItem2s.add(new MyItem2(title, Integer.parseInt(request_list.get(i).getRID())));
                 }
 
                 adapter2.notifyDataSetChanged();
+            }
+            else if (s.first.equals("answerRequest")) {
+                Log.v("error?", s.second);
             }
         }
     });

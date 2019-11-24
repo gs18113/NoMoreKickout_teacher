@@ -1,7 +1,15 @@
 package com.example.nomorekickout_teacher;
 
 public class Requests {
-    private String ID, building, room, name, noAlart, requestType;
+    private String RID, ID, building, room, name, noAlart, requestType;
+
+    public String getRID() {
+        return RID;
+    }
+
+    public void setRID() {
+        this.RID=RID;
+    }
 
     public String getID() {
         return ID;
