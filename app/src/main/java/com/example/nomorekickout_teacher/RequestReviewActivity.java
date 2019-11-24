@@ -55,10 +55,10 @@ public class RequestReviewActivity extends AppCompatActivity {
                     String title="";
 
                     if (request_list.get(i).getRequestType().equals("1")) {//change user
-                        title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"으로 변경 요청";
+                        title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"호로 변경 요청";
                     }
                     else {//new user
-                        title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"으로 가입 요청";
+                        title=request_list.get(i).getName()+"학생이 "+request_list.get(i).getBuilding()+" "+request_list.get(i).getRoom()+"호로 가입 요청";
                     }
 
                     myItem2s.add(new MyItem2(title, Integer.parseInt(request_list.get(i).getRID())));
