@@ -33,16 +33,29 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DormDBManager extends SQLiteOpenHelper {
     public static final String ROOT_DIR = "/data/data/com.example.nomorekickout_teacher/databases/";
     private static final String DATABASE_NAME = "db";
     private Integer returnval;
     private Boolean finished=false;
+    Pair[] pairs;
 
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
         public void handleResult(Pair<String, String> s) {
+            if (s.first.equals("deleteRoom")) {
+                if (s.second==null) {
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            serverManager.execute(pairs);
+                        }
+                    }, 2000);
+                }
+            }
         }
     });
 
@@ -269,10 +282,11 @@ public class DormDBManager extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 if (cursor.getInt(2)==room) {
-                    serverManager.execute(
+                    pairs = new Pair[] {
                             Pair.create("qtype", "deleteRoom"),
                             Pair.create("ID", String.valueOf(cursor.getInt(0)))
-                    );
+                    };
+                    serverManager.execute(pairs);
                     db.delete("dormInfo", "ID="+cursor.getInt(0), null);
                     //Log.v("asdf", cursor.getInt(0)+"%%%%%%%%%%%%%%");
                     return true;
