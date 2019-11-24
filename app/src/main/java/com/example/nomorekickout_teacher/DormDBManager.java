@@ -62,7 +62,7 @@ public class DormDBManager extends SQLiteOpenHelper {
         @Override
         protected void onPostExecute(Pair<Integer,Pair<String,Integer>> s) {
             super.onPostExecute(s);
-            Log.v("result", String.valueOf(s.first));
+            //Log.v("result", String.valueOf(s.first));
             returnval=s.first;
 
             String sql = "select * from dormInfo where ID="+returnval;
@@ -73,7 +73,7 @@ public class DormDBManager extends SQLiteOpenHelper {
 
             if (cursor.moveToFirst()) {
                 do {
-                    Log.v("asfd", cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3));
+                    //Log.v("asfd", cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3));
                 } while (cursor.moveToNext());
             }
 
@@ -85,7 +85,7 @@ public class DormDBManager extends SQLiteOpenHelper {
             contentValues.put("members", "");
             contentValues.put("isawake", 0);
 
-            Log.v("asdf", returnval+"*******************");
+            //Log.v("asdf", returnval+"*******************");
 
 
             db.insert("dormInfo", null, contentValues);
@@ -108,12 +108,12 @@ public class DormDBManager extends SQLiteOpenHelper {
                 con.setChunkedStreamingMode(0);
 
                 JSONObject cred = new JSONObject();
-                Log.v("asdf", pairs[0].first+" 2");
+                //Log.v("asdf", pairs[0].first+" 2");
                 cred.put("building", URLEncoder.encode(pairs[0].first, "UTF-8"));
                 cred.put("room", pairs[0].second);
                 cred.put("members", "[]");
                 cred.put("isawake", 0);
-                Log.v("asdf", cred.toString());
+                //Log.v("asdf", cred.toString());
 
                 con.connect();
 
@@ -122,7 +122,7 @@ public class DormDBManager extends SQLiteOpenHelper {
                 localDataOutputStream.flush();
 
                 int status = con.getResponseCode();
-                Log.v("asdf", status+"$$$$$$$$$$$$$$$$$$$");
+                //Log.v("asdf", status+"$$$$$$$$$$$$$$$$$$$");
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String decodedString;
@@ -256,7 +256,7 @@ public class DormDBManager extends SQLiteOpenHelper {
             }while (cursor.moveToNext());
         }
 
-        Log.v("asdf", building+" 1");
+        //Log.v("asdf", building+" 1");
         SendQuery sendQuery = new SendQuery();
         sendQuery.execute(Pair.create(building,room));
 

@@ -34,7 +34,7 @@ public class RequestReviewActivity extends AppCompatActivity {
             else if (s.first.equals("getAllRequests")) {
                 Gson gson = new Gson();
                 String json = s.second;
-                Log.v("why not showing?", json);
+                //Log.v("why not showing?", json);
                 ArrayList<Requests> request_list=new ArrayList<>();
 
                 try {
@@ -67,7 +67,7 @@ public class RequestReviewActivity extends AppCompatActivity {
                 adapter2.notifyDataSetChanged();
             }
             else if (s.first.equals("answerRequest")) {
-                Log.v("error?", s.second);
+                //Log.v("error?", s.second);
             }
         }
     });
@@ -94,7 +94,7 @@ public class RequestReviewActivity extends AppCompatActivity {
     public void allClear(View view) {
 
         for (int i=0; i<myItem2s.size(); i++) {
-            Log.v("why is this still here", myItem2s.get(i).getTitle()+" "+myItem2s.get(i).getRID());
+            //Log.v("why is this still here", myItem2s.get(i).getTitle()+" "+myItem2s.get(i).getRID());
             serverManager.execute(
                     Pair.create("qtype", "answerRequest"),
                     Pair.create("RID", myItem2s.get(i).getRID().toString()),

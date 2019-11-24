@@ -57,11 +57,11 @@ public class CheckActivity extends AppCompatActivity {
         ArrayList<String> buildingnames = new ArrayList<>();
         buildingnames.add("모든 건물");
         statics.initialize();
-        Log.v("해명해", arrayList.toString());
+        //Log.v("해명해", arrayList.toString());
         for (int i=0; i<arrayList.size(); i++) {
             String now = arrayList.get(i).get("building");
             statics.putmap(Integer.parseInt(arrayList.get(i).get("ID")), false);
-            Log.v("what is this", arrayList.get(i).get("ID"));
+            //Log.v("what is this", arrayList.get(i).get("ID"));
             if (building.containsKey(now)||now.equals("")) continue;
             buildingnames.add(now);
             building.put(now, true);
@@ -121,11 +121,11 @@ public class CheckActivity extends AppCompatActivity {
         }
         dbarray=dbManager.getList(sql);
 
-        Log.v("gegegegege", dbarray.toString());
+        //Log.v("gegegegege", dbarray.toString());
 
         for (int i=0; i<dbarray.size(); i++) {
-            Log.v("print this", dbarray.get(i).get("ID"));
-            Log.v("and this", statics.getmap(Integer.parseInt(dbarray.get(i).get("ID"))).toString());
+            //Log.v("print this", dbarray.get(i).get("ID"));
+            //Log.v("and this", statics.getmap(Integer.parseInt(dbarray.get(i).get("ID"))).toString());
             myItems.add(new MyItem(dbarray.get(i).get("building")+" "+dbarray.get(i).get("room")+"호", statics.getmap(Integer.parseInt(dbarray.get(i).get("ID"))), Integer.parseInt(dbarray.get(i).get("ID"))));
         }
 

@@ -34,7 +34,7 @@ public class RoomsActivity extends AppCompatActivity {
 
         dbManager = new DormDBManager(this);
         arrayList = dbManager.getAll();
-        Log.v("arrayList", arrayList.toString()+"..........................................................................................");
+        //Log.v("arrayList", arrayList.toString()+"..........................................................................................");
     }
 
     public void addConfirm(View view) {

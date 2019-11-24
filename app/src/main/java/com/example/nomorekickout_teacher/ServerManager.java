@@ -63,7 +63,7 @@ public class ServerManager{
                     }
                     else cred.put(pair.first, URLEncoder.encode(pair.second, "UTF-8"));
                 }
-                Log.v("QueryJSON", cred.toString());
+                //Log.v("QueryJSON", cred.toString());
 
                 con.connect();
 
@@ -72,7 +72,7 @@ public class ServerManager{
                 localDataOutputStream.flush();
 
                 int status = con.getResponseCode();
-                Log.v("Response", status+"");
+                //Log.v("Response", status+"");
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String decodedString;
