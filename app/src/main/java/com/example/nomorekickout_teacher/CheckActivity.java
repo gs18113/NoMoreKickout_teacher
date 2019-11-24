@@ -167,8 +167,6 @@ public class CheckActivity extends AppCompatActivity {
     public void sendAlarm(View view) {serverManager.execute(Pair.create("qtype", "wakeAll"));}
 
     public void getBack(View view) {
-        arrayList=dbManager.getAll();
-        Log.v("late", late);
         serverManager.execute(Pair.create("qtype", "addLate"));
         finish();
     }
