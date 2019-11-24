@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -18,6 +19,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CheckActivity extends AppCompatActivity {
 
@@ -34,6 +37,20 @@ public class CheckActivity extends AppCompatActivity {
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
         public void handleResult(Pair<String, String> s) {
+            if(s.first.equals("wakeAll")){
+                if(s.second == null){
+                    Toast.makeText(CheckActivity.this, "통신 오류, 재시도중...", Toast.LENGTH_SHORT).show();
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            serverManager.execute(Pair.create("qtype", "wakeAll"));
+                        }
+                    }, 2000);
+                }
+                else{
+                    Toast.makeText(CheckActivity.this, "알람 전송 완료", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     });
 
