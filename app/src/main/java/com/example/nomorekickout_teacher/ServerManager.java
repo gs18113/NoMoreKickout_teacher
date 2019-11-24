@@ -58,7 +58,7 @@ public class ServerManager{
                 for (Pair<String, String> pair : pairs){
                     if(pair.first.equals("ID") || pair.first.equals("room") || pair.first.equals("alarm")
                             || pair.first.equals("noAlert") || pair.first.equals("latecnt") || pair.first.equals("RID")
-                            || pair.first.equals("requestType") || pair.first.equals("isawake")){
+                            || pair.first.equals("requestType") || pair.first.equals("isawake") || pair.first.equals("confirm")){
                         cred.put(pair.first, Integer.parseInt(pair.second));
                     }
                     else cred.put(pair.first, URLEncoder.encode(pair.second, "UTF-8"));
