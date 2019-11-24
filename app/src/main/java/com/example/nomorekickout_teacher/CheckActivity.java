@@ -33,6 +33,7 @@ public class CheckActivity extends AppCompatActivity {
     ArrayList<MyItem> myItems = new ArrayList<>();
     ListView listView;
     myAdapter adapter;
+    String late;
 
     ServerManager serverManager = new ServerManager("http://34.84.59.141", new ServerManager.OnResult() {
         @Override
@@ -49,6 +50,23 @@ public class CheckActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(CheckActivity.this, "알람 전송 완료", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else if (s.first.equals("addLate")) {
+                if (s.second==null) {
+                    Toast.makeText(CheckActivity.this, "통신 오류, 재시도중...", Toast.LENGTH_SHORT).show();
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            serverManager.execute(
+                                    Pair.create("qtype", "addLate"),
+                                    Pair.create("json", late)
+                            );
+                        }
+                    }, 2000);
+                }
+                else {
+                    Toast.makeText(CheckActivity.this, "지각 처리 완료", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -151,5 +169,23 @@ public class CheckActivity extends AppCompatActivity {
 
     public void sendAlarm(View view) {serverManager.execute(Pair.create("qtype", "wakeAll"));}
 
-    public void getBack(View view) {finish();}
+    public void getBack(View view) {
+        arrayList=dbManager.getAll();
+        late="[";
+        Boolean flag=false;
+        for (int i=0; i<arrayList.size(); i++) {
+            if (arrayList.get(i).get("isawake").equals("0")) {
+                if (flag) late+=",";
+                else flag=true;
+                late+=arrayList.get(i).get("ID");
+            }
+        }
+        late+="]";
+        Log.v("late", late);
+        serverManager.execute(
+                Pair.create("qtype", "addLate"),
+                Pair.create("json", late)
+        );
+        finish();
+    }
 }
