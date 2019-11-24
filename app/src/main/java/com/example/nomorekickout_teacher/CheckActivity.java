@@ -58,10 +58,7 @@ public class CheckActivity extends AppCompatActivity {
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            serverManager.execute(
-                                    Pair.create("qtype", "addLate"),
-                                    Pair.create("rows", late)
-                            );
+                            serverManager.execute(Pair.create("qtype", "addLate"));
                         }
                     }, 2000);
                 }
@@ -171,21 +168,8 @@ public class CheckActivity extends AppCompatActivity {
 
     public void getBack(View view) {
         arrayList=dbManager.getAll();
-        late="[";
-        Boolean flag=false;
-        for (int i=0; i<arrayList.size(); i++) {
-            if (arrayList.get(i).get("isawake").equals("0")) {
-                if (flag) late+=",";
-                else flag=true;
-                late+=arrayList.get(i).get("ID");
-            }
-        }
-        late+="]";
         Log.v("late", late);
-        serverManager.execute(
-                Pair.create("qtype", "addLate"),
-                Pair.create("rows", late)
-        );
+        serverManager.execute(Pair.create("qtype", "addLate"));
         finish();
     }
 }
