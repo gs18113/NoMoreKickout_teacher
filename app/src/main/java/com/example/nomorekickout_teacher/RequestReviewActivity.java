@@ -91,6 +91,7 @@ public class RequestReviewActivity extends AppCompatActivity {
     public void allClear(View view) {
 
         for (int i=0; i<myItem2s.size(); i++) {
+            Log.v("why is this still here", myItem2s.get(i).getTitle()+" "+myItem2s.get(i).getRID());
             serverManager.execute(
                     Pair.create("qtype", "answerRequest"),
                     Pair.create("RID", myItem2s.get(i).getRID().toString()),

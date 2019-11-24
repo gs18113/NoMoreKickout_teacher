@@ -9,9 +9,11 @@
     <Button
         android:id="@+id/adapter2okbutton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="승인"/>
     <Button
         android:id="@+id/adapter2nobutton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="거절"/>
 </LinearLayout>
