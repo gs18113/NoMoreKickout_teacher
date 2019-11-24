@@ -80,7 +80,7 @@ public class CheckActivity extends AppCompatActivity {
 
         selectFloor.setAdapter(ad_floor);
 
-        //
+        listView=(ListView)findViewById(R.id.listview);
     }
 
     public void changeList() {
