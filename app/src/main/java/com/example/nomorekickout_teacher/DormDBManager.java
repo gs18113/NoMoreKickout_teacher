@@ -94,7 +94,7 @@ public class DormDBManager extends SQLiteOpenHelper {
 
                 JSONObject cred = new JSONObject();
                 Log.v("asdf", pairs[0].first+" 2");
-                cred.put("building", pairs[0].first);
+                cred.put("building", URLEncoder.encode(pairs[0].first, "UTF-8"));
                 cred.put("room", pairs[0].second);
                 cred.put("members", "");
                 Log.v("asdf", cred.toString());
